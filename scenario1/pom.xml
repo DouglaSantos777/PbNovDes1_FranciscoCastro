@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.compassuol</groupId>
-    <artifactId>desafio1</artifactId>
+    <artifactId>scenario1</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
