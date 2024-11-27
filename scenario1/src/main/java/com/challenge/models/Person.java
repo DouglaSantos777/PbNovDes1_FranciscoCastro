@@ -6,17 +6,15 @@ import java.util.List;
 public class Person {
     private String name;
     private Person spouse;
-    private List<Person> children;
+    private List<Person> children = new ArrayList<>();
 
     public Person(String name) {
         this.name = name;
-        this.children = new ArrayList<>();
     }
 
     public Person(String name, Person person) {
         this.name = name;
         this.spouse = person;
-        this.children = new ArrayList<>();
     }
 
     public String getName() {
@@ -27,12 +25,21 @@ public class Person {
         this.spouse = spouse;
     }
 
-
     public void addChild(Person child) {
         this.children.add(child);
     }
 
-    public void printFamilyTree() {
-        System.out.println("Teste");
+    public void printFamilyTree(int n) {
+        if (spouse == null) {
+            System.out.println(name + " -- Married to: -- Single");
+        } else if (children.isEmpty()) {
+            System.out.println(name + " -- Married to: -- " +this.spouse.name
+                    + " -- Children: \n");
+        } else {
+            System.out.println(name + " -- Married to: -- " +this.spouse.name
+                    + " -- Children: \n");
+
+            this.children.forEach(child -> child.printFamilyTree(1));
+        }
     }
 }
