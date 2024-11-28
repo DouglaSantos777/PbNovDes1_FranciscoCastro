@@ -7,7 +7,7 @@ public class Person {
     private final String name;
     private Person spouse;
 
-    private final List<Person> children = new ArrayList<>();;
+    private final List<Person> children = new ArrayList<>();
 
     public Person(String name) {
         this.name = name;
@@ -15,7 +15,7 @@ public class Person {
 
     public Person(String name, Person parent) {
         this.name = name;
-        parent.addChild( this );
+        parent.addChild(this);
     }
 
     public void addChild(Person child) {
@@ -26,20 +26,22 @@ public class Person {
         this.spouse = spouse;
     }
 
-    public void printFamilyTree(int n) {
-
+    public void printFamilyTree(int spacing) {
         System.out.print(name);
 
         if (spouse == null) {
-            System.out.print(" -- Single \n");
+            System.out.print(" -- Single \n ");
         } else if (children.isEmpty()) {
             System.out.print(" -- Married to: -- " + spouse.name
-                    + " -- Children:\n");
+                    + " -- Children:\n ");
         } else {
             System.out.println(" -- Married to: -- " + spouse.name
                     + " -- Children:");
 
-            children.forEach(child -> child.printFamilyTree(1));
+            for (int i = 0; i <= spacing; i++) {
+                System.out.print("  ");
+                children.forEach(child -> child.printFamilyTree(spacing + 1));
+            }
         }
     }
 }
