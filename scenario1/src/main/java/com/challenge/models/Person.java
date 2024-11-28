@@ -4,42 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
-    private String name;
+    private final String name;
     private Person spouse;
-    private List<Person> children = new ArrayList<>();
+
+    private final List<Person> children = new ArrayList<>();;
 
     public Person(String name) {
         this.name = name;
     }
 
-    public Person(String name, Person person) {
+    public Person(String name, Person parent) {
         this.name = name;
-        this.spouse = person;
+        parent.addChild( this );
     }
 
-    public String getName() {
-        return name;
+    public void addChild(Person child) {
+        children.add(child);
     }
 
     public void spouse(Person spouse) {
         this.spouse = spouse;
     }
 
-    public void addChild(Person child) {
-        this.children.add(child);
-    }
-
     public void printFamilyTree(int n) {
-        if (spouse == null) {
-            System.out.println(name + " -- Married to: -- Single");
-        } else if (children.isEmpty()) {
-            System.out.println(name + " -- Married to: -- " +this.spouse.name
-                    + " -- Children: \n");
-        } else {
-            System.out.println(name + " -- Married to: -- " +this.spouse.name
-                    + " -- Children: \n");
 
-            this.children.forEach(child -> child.printFamilyTree(1));
+        System.out.print(name);
+
+        if (spouse == null) {
+            System.out.print(" -- Single \n");
+        } else if (children.isEmpty()) {
+            System.out.print(" -- Married to: -- " + spouse.name
+                    + " -- Children:\n");
+        } else {
+            System.out.println(" -- Married to: -- " + spouse.name
+                    + " -- Children:");
+
+            children.forEach(child -> child.printFamilyTree(1));
         }
     }
 }
