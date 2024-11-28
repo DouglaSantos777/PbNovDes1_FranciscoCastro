@@ -12,9 +12,9 @@ public class Person {
         this.name = name;
     }
 
-    public Person(String name, Person parent) {
-        this.name = name;
-        parent.addChild(this);
+    public Person(String name, Person genitor) {
+        this(name);
+        genitor.addChild(this);
     }
 
     public void addChild(Person child) {
