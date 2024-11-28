@@ -6,7 +6,6 @@ import java.util.List;
 public class Person {
     private final String name;
     private Person spouse;
-
     private final List<Person> children = new ArrayList<>();
 
     public Person(String name) {
@@ -27,21 +26,20 @@ public class Person {
     }
 
     public void printFamilyTree(int spacing) {
+        System.out.print("  ".repeat(spacing));
         System.out.print(name);
 
         if (spouse == null) {
-            System.out.print(" -- Single \n ");
-        } else if (children.isEmpty()) {
-            System.out.print(" -- Married to: -- " + spouse.name
-                    + " -- Children:\n ");
+            System.out.print(" -- Single");
         } else {
-            System.out.println(" -- Married to: -- " + spouse.name
-                    + " -- Children:");
+            System.out.print(" -- Married to: " + spouse.name);
+        }
 
-            for (int i = 0; i <= spacing; i++) {
-                System.out.print("  ");
-                children.forEach(child -> child.printFamilyTree(spacing + 1));
-            }
+        if (!children.isEmpty()) {
+            System.out.print(" -- Children:\n");
+            children.forEach(child -> child.printFamilyTree(spacing + 1));
+        } else {
+            System.out.println();
         }
     }
 }
