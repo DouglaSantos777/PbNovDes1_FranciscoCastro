@@ -1,9 +1,13 @@
 package com.challenge.scenario2.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Gondola implements FerrisWheel {
     private int number;
     private Person seat1;
     private Person seat2;
+    private final List<Person> seats = new ArrayList<>(18);
 
     public Gondola(){
 
@@ -15,15 +19,14 @@ public class Gondola implements FerrisWheel {
         this.seat2 = seat2;
     }
 
-
     @Override
-    public void board(int number, Person seat1, Person seat2) {
-
+    public boolean board(int number, Person seat1, Person seat2) {
+    return false;
     }
 
     @Override
-    public void board(int number, Person seat1) {
-
+    public boolean board(int number, Person seat1) {
+    return true;
     }
 
     @Override
