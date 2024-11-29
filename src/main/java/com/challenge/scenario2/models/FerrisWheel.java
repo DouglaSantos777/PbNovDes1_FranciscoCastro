@@ -15,7 +15,7 @@ public class FerrisWheel {
     }
 
     public boolean gondolaIsEmpty(Gondola gondola) {
-        return gondola.getSeats().isEmpty();
+        return gondola.getSeats()[0] == null && gondola.getSeats()[1] == null;
     }
 
     public boolean isValidGondola(int number) {
@@ -37,13 +37,13 @@ public class FerrisWheel {
 
     public void board(int number, Child seat1 , Person seat2) {
         if(isValidDoubleBoard(number, seat1, seat2)){
-            this.gondolas.add(new Gondola(number, seat1, seat2));
+            gondolas.add((number - 1),  new Gondola(number, seat1, seat2));
         }
     }
 
     public void board(int number, Child seat1) {
        if(isValidIndividualBoard(number, seat1)){
-           this.gondolas.add(new Gondola(number, seat1));
+           this.gondolas.add((number -1) , new Gondola(number, seat1));
        }
     }
 
