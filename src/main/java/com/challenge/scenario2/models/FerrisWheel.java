@@ -10,9 +10,13 @@ public class FerrisWheel {
         new ArrayList<>(18);
     }
 
+    public boolean gondolaIsEmpty(Gondola gondola) {
+        return gondola.getSeats().isEmpty();
+    }
+
     public boolean isValidGondola(int number) {
         for (Gondola gondola : gondolas) {
-            if (gondola.getNumber() == number) {
+            if (gondola.getNumber() == number && gondolaIsEmpty(gondola)) {
                 return true;
             }
         }
@@ -20,7 +24,8 @@ public class FerrisWheel {
     }
 
     public boolean board(int number, Person seat1, Person seat2) {
-       return true;
+      return true;
+
 
     }
 

@@ -13,17 +13,13 @@ public class Child extends Person {
     }
 
     public boolean haveParent() {
-        if (parent != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return parent != null;
     }
 
     public boolean haveMinimumAge (){
-        if(getAge() < 12){
+      /*  if(getAge() < 12){
             return false;
-        }
+        } */
         return true;
     }
 
