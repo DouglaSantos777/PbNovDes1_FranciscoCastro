@@ -12,19 +12,12 @@ public class Child extends Person {
         this.parent = parent;
     }
 
-    public boolean haveParent() {
-        return parent != null;
-    }
-
     public Adult getParent() {
         return parent;
     }
 
     public boolean haveMinimumAge (){
-      /*  if(getAge() < 12){
-            return false;
-        } */
-        return true;
+        return getAge() >= 12;
     }
 
 }

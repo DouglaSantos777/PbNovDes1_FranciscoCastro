@@ -5,7 +5,7 @@ import java.util.List;
 
 public class FerrisWheel {
     private static final int NUM_GONDOLAS = 18;
-    List<Gondola> gondolas;
+    private final List<Gondola> gondolas;
 
     public FerrisWheel() {
         gondolas =  new ArrayList<>(NUM_GONDOLAS);
@@ -32,7 +32,7 @@ public class FerrisWheel {
     }
 
     public boolean isValidIndividualBoard(int number, Child seat1){
-        return isValidGondola(number) && seat1.haveParent();
+        return isValidGondola(number) && seat1.haveMinimumAge();
     }
 
     public void board(int number, Child seat1 , Person seat2) {
@@ -42,13 +42,12 @@ public class FerrisWheel {
     }
 
     public void board(int number, Child seat1) {
-       if(isValidIndividualBoard(number, seat1)){
-           this.gondolas.add((number -1) , new Gondola(number, seat1));
+       if(isValidIndividualBoard(number, seat1) && seat1.haveMinimumAge()){
+           this.gondolas.add((number - 1) , new Gondola(number, seat1));
        }
     }
 
     public void status() {
-
         System.out.println("Gondola Status");
         System.out.println("----------------------------------");
         gondolas.forEach(System.out::println);
