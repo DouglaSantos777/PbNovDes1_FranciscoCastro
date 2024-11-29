@@ -1,4 +1,4 @@
-package com.challenge.models;
+package com.challenge.scenario1.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,19 @@ public class Person {
         genitor.addChild(this);
     }
 
+    //add child to List of children
+
     public void addChild(Person child) {
         children.add(child);
     }
 
-    public void spouse(Person spouse) {
+    // add spouse to Person
+    public void addSpouse(Person spouse) {
         this.spouse = spouse;
     }
+
+    /* Method to print the family tree starting from this person,
+    with indentation based on the spacing */
 
     public void printFamilyTree(int spacing) {
         System.out.print("  ".repeat(spacing));
@@ -35,6 +41,7 @@ public class Person {
             System.out.print(" -- Married to: " + spouse.name);
         }
 
+// If the person has children, print them with indentation for the hierarchy with 2 spaces
         if (!children.isEmpty()) {
             System.out.print(" -- Children:\n");
             children.forEach(child -> child.printFamilyTree(spacing + 1));

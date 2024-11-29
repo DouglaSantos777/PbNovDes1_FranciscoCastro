@@ -1,5 +1,9 @@
 #.idea folder
 .idea/
+
+#out folder
+/out/
+
 # Compiled class file
 *.class
 
