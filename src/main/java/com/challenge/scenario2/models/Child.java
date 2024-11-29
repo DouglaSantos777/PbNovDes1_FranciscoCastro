@@ -16,6 +16,10 @@ public class Child extends Person {
         return parent != null;
     }
 
+    public Adult getParent() {
+        return parent;
+    }
+
     public boolean haveMinimumAge (){
       /*  if(getAge() < 12){
             return false;
