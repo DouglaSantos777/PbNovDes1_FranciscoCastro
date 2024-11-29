@@ -3,11 +3,11 @@ package com.challenge.scenario2.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gondola implements FerrisWheel {
+public class Gondola {
     private int number;
     private Person seat1;
     private Person seat2;
-    private final List<Person> seats = new ArrayList<>(18);
+    private final List<Person> seats = new ArrayList<>(2);
 
     public Gondola(){
 
@@ -19,19 +19,12 @@ public class Gondola implements FerrisWheel {
         this.seat2 = seat2;
     }
 
-    @Override
-    public boolean board(int number, Person seat1, Person seat2) {
-    return false;
+    public int getNumber() {
+        return number;
     }
 
-    @Override
-    public boolean board(int number, Person seat1) {
-    return true;
-    }
-
-    @Override
-    public void status() {
-        System.out.println("Teste de print do status");
+    public List<Person> getSeats() {
+        return seats;
     }
 
 }

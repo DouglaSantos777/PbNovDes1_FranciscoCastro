@@ -7,7 +7,7 @@ import com.challenge.scenario2.models.Gondola;
 
 public class Main {
     public static void main(String[] args) {
-        FerrisWheel ferrisWheel = new Gondola() {
+        FerrisWheel ferrisWheel = new FerrisWheel() {
         }; // Creating a new Ferris wheel
         Adult paulo = new Adult("Paulo", 42); // Adult named Paulo
         // Paulo's children
