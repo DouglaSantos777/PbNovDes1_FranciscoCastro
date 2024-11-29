@@ -28,7 +28,7 @@ public class Gondola implements FerrisWheel {
 
     @Override
     public void status() {
-
+        System.out.println("Teste de print do status");
     }
 
 }
