@@ -17,5 +17,8 @@ public class Person {
         return age;
     }
 
+    public boolean haveMinimumAge (){
+        return getAge() >= 12;
+    }
 
 }
