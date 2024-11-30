@@ -32,6 +32,34 @@ public class Gondola {
         return seats;
     }
 
+    public boolean isValidGondola(int num) {
+        return number == num && seats[0] == null && seats[1] == null;
+    }
+
+    public boolean isValidDoubleBoard(int number, Person seat1, Person seat2) {
+        if (seat1 instanceof Child && seat2 instanceof Adult) {
+            if (((Child) seat1).canRideAlone()) {
+                return isValidGondola(number);
+            }
+            return isValidGondola(number) && ((Child) seat1).getParent() == seat2;
+        } else if (seat2 instanceof Child && seat1 instanceof Adult) {
+            if (((Child) seat2).canRideAlone()) {
+                return isValidGondola(number);
+            }
+            return isValidGondola(number) && ((Child) seat2).getParent() == seat1;
+        }
+        return false;
+    }
+
+    public boolean isValidIndividualBoard(int number, Person seat1) {
+        if (seat1 instanceof Adult) {
+            return isValidGondola(number);
+        } else if (seat1 instanceof Child && ((Child) seat1).canRideAlone()) {
+            return isValidGondola(number);
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         if (seats[0] == null && seats[1] == null) {

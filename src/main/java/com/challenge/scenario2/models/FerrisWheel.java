@@ -6,6 +6,7 @@ import java.util.List;
 public class FerrisWheel {
     private static final int NUM_GONDOLAS = 18;
     private final List<Gondola> gondolas;
+    private Gondola gondola;
 
     public FerrisWheel() {
         gondolas = new ArrayList<>(NUM_GONDOLAS);
@@ -14,56 +15,34 @@ public class FerrisWheel {
         }
     }
 
-    public boolean gondolaIsEmpty(Gondola gondola) {
-        return gondola.getSeats()[0] == null && gondola.getSeats()[1] == null;
-    }
+    public void board(int number, Person... seats) {
+        if (number < 1 || number > NUM_GONDOLAS) {
+            System.out.println("Error: Invalid gondola number " + number);
+            return;
+        }
 
-    public boolean isValidGondola(int number) {
-        for (Gondola gondola : gondolas) {
-            if (gondola.getNumber() == number && gondolaIsEmpty(gondola)) {
-                return true;
+        if (seats.length < 1 || seats.length > 2) {
+            System.out.println("Error: Invalid number of passengers for gondola " + number);
+            return;
+        }
+
+        Gondola gondola = gondolas.get(number - 1);
+
+        if (seats.length == 1) {
+            if (gondola.isValidIndividualBoard(number, seats[0])) {
+                gondolas.set(number - 1, new Gondola(number, seats[0]));
+                System.out.println("Successfully boarded 1 passenger to gondola " + number);
+            } else {
+                System.out.println("Invalid boarding attempt for gondola " + number + " with 1 passenger.");
             }
         }
-        return false;
-    }
 
-    public boolean isValidDoubleBoard(int number, Person seat1, Person seat2) {
-        if (seat1 instanceof Child && seat2 instanceof Adult) {
-            if (((Child) seat1).canRideAlone()) {
-                return isValidGondola(number);
-            }
-            return isValidGondola(number) && ((Child) seat1).getParent() == seat2;
-        } else if (seat2 instanceof Child && seat1 instanceof Adult) {
-            if (((Child) seat2).canRideAlone()) {
-                return isValidGondola(number);
-            }
-            return isValidGondola(number) && ((Child) seat2).getParent() == seat1;
-        }
-        return false;
-    }
-
-    public boolean isValidIndividualBoard(int number, Person seat1) {
-        if (seat1 instanceof Adult) {
-            return isValidGondola(number);
-        } else if (seat1 instanceof Child && ((Child) seat1).canRideAlone()) {
-            return isValidGondola(number);
-        }
-        return false;
-    }
-
-    public void board(int number, Person seat1, Person seat2) {
-        if (isValidDoubleBoard(number, seat1, seat2)) {
-            Gondola newGondola = seat1 instanceof Child ? new Gondola(number, seat1, seat2) : new Gondola(number, seat2, seat1);
-            gondolas.add((number - 1), newGondola);
-        } else {
-            System.out.println("Invalid boarding attempt for gondola " + number);
-        }
-    }
-
-    public void board(int number, Person seat1) {
-        if (seat1 instanceof Child) {
-            if (isValidIndividualBoard(number, seat1)) {
-                this.gondolas.add((number - 1), new Gondola(number, seat1));
+        else {
+            if (gondola.isValidDoubleBoard(number, seats[0], seats[1])) {
+                gondolas.set(number - 1, new Gondola(number, seats[0], seats[1]));
+                System.out.println("Successfully boarded 2 passengers to gondola " + number);
+            } else {
+                System.out.println("Invalid boarding attempt for gondola " + number + " with 2 passengers.");
             }
         }
     }
