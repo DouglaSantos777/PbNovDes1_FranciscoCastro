@@ -1,6 +1,6 @@
 package com.challenge.scenario2.models;
 
-public class Person {
+public abstract class Person {
     private final String name;
     private final int age;
 
@@ -15,10 +15,6 @@ public class Person {
 
     public int getAge() {
         return age;
-    }
-
-    public boolean haveMinimumAge (){
-        return getAge() >= 12;
     }
 
 }

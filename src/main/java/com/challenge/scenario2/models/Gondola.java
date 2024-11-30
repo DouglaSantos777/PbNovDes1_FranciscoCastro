@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gondola {
-    private int number;
+    private final int number;
     private Person seat1;
     private Person seat2;
     private final Person[] seats = new Person[2];
@@ -13,18 +13,15 @@ public class Gondola {
         this.number = number;
     }
 
-    public Gondola(int number, Person seat1, Person seat2) {
+    public Gondola(int number, Person seat1) {
         this.number = number;
-        this.seat1 = seat1;
-        this.seat2 = seat2;
-        seats[0] = seat1;
-        seats[1] = seat2;
+        this.seats[0] = seat1;
     }
 
-    public Gondola(int number, Person seat1) {
-        this.seat1 = seat1;
+    public Gondola(int number, Person seat1, Person seat2) {
         this.number = number;
-        seats[0] = seat1;
+        this.seats[0] = seat1;
+        this.seats[1] = seat2;
     }
 
     public int getNumber() {

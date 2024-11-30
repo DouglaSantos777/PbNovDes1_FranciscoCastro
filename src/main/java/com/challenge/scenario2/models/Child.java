@@ -16,5 +16,11 @@ public class Child extends Person {
         return parent;
     }
 
+    public boolean isOldEnough (){
+        return getAge() >= 12;
+    }
 
+    public boolean canRideAlone() {
+        return isOldEnough();
+    }
 }
