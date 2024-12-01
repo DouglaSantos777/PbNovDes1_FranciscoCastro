@@ -1,8 +1,8 @@
 package com.challenge.scenario2;
 
-import com.challenge.scenario2.models.Adult;
-import com.challenge.scenario2.models.Child;
-import com.challenge.scenario2.models.FerrisWheel;
+import com.challenge.scenario2.model.entities.Adult;
+import com.challenge.scenario2.model.entities.Child;
+import com.challenge.scenario2.model.entities.FerrisWheel;
 
 public class Main {
     public static void main(String[] args) {

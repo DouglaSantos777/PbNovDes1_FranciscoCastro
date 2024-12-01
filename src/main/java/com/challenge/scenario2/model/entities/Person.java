@@ -1,6 +1,6 @@
-package com.challenge.scenario2.models;
+package com.challenge.scenario2.model.entities;
 
-public abstract class Person {
+public class Person {
     private final String name;
     private final int age;
 

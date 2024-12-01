@@ -1,9 +1,9 @@
-package com.challenge.scenario2.models;
+package com.challenge.scenario2.model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adult extends Person{
+public class Adult extends Person {
     private final List<Child> children;
 
     public Adult(String name, int age) {

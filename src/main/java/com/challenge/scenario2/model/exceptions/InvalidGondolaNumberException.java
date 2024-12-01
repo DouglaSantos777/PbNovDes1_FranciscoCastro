@@ -1,4 +1,4 @@
-package com.challenge.scenario2.models.exceptions;
+package com.challenge.scenario2.model.exceptions;
 
 public class InvalidGondolaNumberException extends Exception {
     private static final long serialVersionUID = 1L;

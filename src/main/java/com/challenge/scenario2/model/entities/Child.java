@@ -1,4 +1,4 @@
-package com.challenge.scenario2.models;
+package com.challenge.scenario2.model.entities;
 
 public class Child extends Person {
     private Adult parent;
@@ -16,11 +16,4 @@ public class Child extends Person {
         return parent;
     }
 
-    public boolean isOldEnough (){
-        return getAge() >= 12;
-    }
-
-    public boolean canRideAlone() {
-        return isOldEnough();
-    }
 }
