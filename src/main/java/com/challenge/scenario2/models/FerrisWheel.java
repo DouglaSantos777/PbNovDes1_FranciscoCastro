@@ -1,5 +1,10 @@
 package com.challenge.scenario2.models;
 
+import com.challenge.scenario2.models.exceptions.InvalidBoardingAttemptException;
+import com.challenge.scenario2.models.exceptions.InvalidGondolaNumberException;
+import com.challenge.scenario2.models.exceptions.InvalidPassengerCountException;
+import com.challenge.scenario2.models.exceptions.NoAvailableGondolaException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,50 +33,48 @@ public class FerrisWheel {
                 return gondola;
             }
         }
-
         return null;
     }
 
     public void board(int number, Person... seats) {
-        if (number < 1 || number > NUM_GONDOLAS) {
-            System.out.println("Error: Invalid gondola number " + number);
-            return;
-        }
-
-        if (seats.length < 1 || seats.length > 2) {
-            System.out.println("Error: Invalid number of passengers for gondola " + number);
-            return;
-        }
-
-        Gondola gondola = gondolas.get(number - 1);
-
-        // Se a gôndola escolhida estiver ocupada, buscar a próxima livre
-        if (gondola.getSeats()[0] != null || gondola.getSeats()[1] != null) {
-            gondola = findNextAvailableGondola(number);
-            if (gondola == null) {
-                System.out.println("Error: No available gondolas.");
-                return;
+        try {
+            if (number < 1 || number > NUM_GONDOLAS) {
+                throw new InvalidGondolaNumberException("Error: Invalid gondola number " + number);
             }
-            number = gondola.getNumber(); // Atualizar para o número da próxima gôndola livre
-        }
 
-        if (seats.length == 1) {
-            if (gondola.isValidIndividualBoard(number, seats[0])) {
-                gondolas.set(number - 1, new Gondola(number, seats[0]));
-                System.out.println("Successfully boarded 1 passenger to gondola " + number);
+            if (seats.length < 1 || seats.length > 2) {
+                throw new InvalidPassengerCountException("Error: Invalid number of passengers for gondola " + number);
+            }
+            Gondola gondola = gondolas.get(number - 1);
+
+            if (gondola.getSeats()[0] != null || gondola.getSeats()[1] != null) {
+                gondola = findNextAvailableGondola(number);
+                if (gondola == null) {
+                    throw new NoAvailableGondolaException("Error: No available gondolas.");
+                }
+                number = gondola.getNumber();
+            }
+
+            if (seats.length == 1) {
+                if (gondola.isValidIndividualBoard(number, seats[0])) {
+                    gondolas.set(number - 1, new Gondola(number, seats[0]));
+
+                } else {
+                    throw new InvalidBoardingAttemptException("Invalid boarding attempt for gondola " + number + " with 1 passenger.");
+                }
             } else {
-                System.out.println("Invalid boarding attempt for gondola " + number + " with 1 passenger.");
+                if (gondola.isValidDoubleBoard(number, seats[0], seats[1])) {
+                    gondolas.set(number - 1, new Gondola(number, seats[0], seats[1]));
+
+                } else {
+                    throw new InvalidBoardingAttemptException("Invalid boarding attempt for gondola " + number + " with 1 passenger.");
+                }
             }
-        } else {
-            if (gondola.isValidDoubleBoard(number, seats[0], seats[1])) {
-                gondolas.set(number - 1, new Gondola(number, seats[0], seats[1]));
-                System.out.println("Successfully boarded 2 passengers to gondola " + number);
-            } else {
-                System.out.println("Invalid boarding attempt for gondola " + number + " with 2 passengers.");
-            }
+        } catch (InvalidGondolaNumberException | InvalidPassengerCountException | NoAvailableGondolaException |
+                 InvalidBoardingAttemptException e) {
+            System.out.println(e.getMessage());
         }
     }
-
 
     public void status() {
         System.out.println("Gondola Status");

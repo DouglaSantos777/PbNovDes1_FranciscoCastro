@@ -1,8 +1,5 @@
 package com.challenge.scenario2.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Gondola {
     private final int number;
     private Person seat1;
