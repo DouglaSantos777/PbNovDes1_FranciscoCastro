@@ -25,6 +25,12 @@ public class FerrisWheel {
         this.gondolaBoardService = new GondolaBoardService(childBoardService);
     }
 
+    private void validateGondolaNumber(int number) throws InvalidGondolaNumberException {
+        if (number < 1 || number > NUM_GONDOLAS) {
+            throw new InvalidGondolaNumberException("Error: Invalid gondola number " + number);
+        }
+    }
+
     private Gondola findNextAvailableGondola(int startingNumber) throws NoAvailableGondolaException {
         for (int i = startingNumber; i < gondolas.size(); i++) {
             if (gondolas.get(i).isAvailable()) {
@@ -66,11 +72,6 @@ public class FerrisWheel {
         }
     }
 
-    private void validateGondolaNumber(int number) throws InvalidGondolaNumberException {
-        if (number < 1 || number > NUM_GONDOLAS) {
-            throw new InvalidGondolaNumberException("Error: Invalid gondola number " + number);
-        }
-    }
 
 
     public void status() {
