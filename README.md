@@ -79,3 +79,52 @@ E execute-o com:
 ---
 
 
+## 📍 Cenário 2: Roda Gigante
+
+### Propósito
+
+Neste cenário, há a operação de uma roda gigante, com suas gôndolas e pessoas embarcando nela. A classe principal já foi fornecida, juntamente com o diagrama de classes. O objetivo é completar os métodos, atributos e classes ausentes para que a classe principal funcione corretamente e retorne o resultado esperado.
+
+A aplicação deve simular o processo de embarque de pessoas nas gôndolas, garantindo que cada pessoa ou grupo de pessoas seja embarcado corretamente nas gôndolas, de acordo com a disponibilidade.
+
+### Requisitos
+
+- Criar um projeto Java com a classe principal fornecida.
+- Implementar a lógica para a classe principal funcionar corretamente, com os métodos necessários para operar a roda gigante.
+- A classe **FerrisWheel** deve ser capaz de procurar a próxima gôndola livre automaticamente. Nenhuma lógica complexa é necessária, mas a gôndola deve ser atribuída de maneira inteligente à próxima disponível.
+- Não é necessário usar banco de dados, todos os dados devem ser mantidos na memória.
+
+### Estrutura do Código
+
+- **Classe `FerrisWheel`**: Deve gerenciar as gôndolas e os passageiros. A lógica de busca pela próxima gôndola livre deve ser implementada aqui.
+- **Classe `Gondola`**: Representa as gôndolas da roda gigante. Cada gôndola deve ter uma capacidade máxima e uma lista de pessoas embarcadas.
+- **Classe `Person`**: Representa as pessoas que embarcarão na roda gigante. Cada pessoa pode ser um **Adulto** ou uma **Criança** e as regras de embarque devem ser seguidas, como crianças necessitando estar acompanhadas por um adulto.
+
+---
+
+## 🛠️ Instruções para Compilar e Executar o Cenário 2
+
+### 1. Executando no IntelliJ IDEA
+
+1. No painel de navegação do IntelliJ, clique com o botão direito no arquivo `Main.java` dentro de `scenario2/src/main/java/com/challenge`.
+2. Selecione a opção **Run 'Main.main()'**.
+
+---
+
+### 2. Executando no Eclipse
+
+---
+
+1. Clique com o botão direito no arquivo `Main.java` localizado em `scenario2/src/main/java/com/challenge`.
+2. Selecione **Run As > Java Application**.
+
+---
+
+### 3. Executando no Visual Studio Code (VS Code)
+
+1. Certifique-se de que a extensão **Java Extension Pack** esteja instalada no VS Code.
+2. Abra o arquivo `Main.java` localizado em `scenario2/src/main/java/com/challenge`.
+3. Clique no ícone de **Run** (um triângulo verde) no canto superior direito ou use o atalho `Ctrl + F5` para executar.
+
+---
+
