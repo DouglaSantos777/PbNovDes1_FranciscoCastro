@@ -6,13 +6,30 @@ import java.util.List;
 public class FerrisWheel {
     private static final int NUM_GONDOLAS = 18;
     private final List<Gondola> gondolas;
-    private Gondola gondola;
 
     public FerrisWheel() {
-        gondolas = new ArrayList<>(NUM_GONDOLAS);
-        for (int i = 0; i < NUM_GONDOLAS; i++) {
-            gondolas.add(new Gondola(i + 1));
+        this.gondolas = new ArrayList<>();
+        for (int i = 1; i <= NUM_GONDOLAS; i++) {
+            gondolas.add(new Gondola(i));
         }
+    }
+
+    private Gondola findNextAvailableGondola(int startingNumber) {
+        for (int i = startingNumber; i < gondolas.size(); i++) {
+            Gondola gondola = gondolas.get(i);
+            if (gondola.getSeats()[0] == null && gondola.getSeats()[1] == null) {
+                return gondola;
+            }
+        }
+
+        for (int i = 0; i < startingNumber; i++) {
+            Gondola gondola = gondolas.get(i);
+            if (gondola.getSeats()[0] == null && gondola.getSeats()[1] == null) {
+                return gondola;
+            }
+        }
+
+        return null;
     }
 
     public void board(int number, Person... seats) {
@@ -28,6 +45,16 @@ public class FerrisWheel {
 
         Gondola gondola = gondolas.get(number - 1);
 
+        // Se a gôndola escolhida estiver ocupada, buscar a próxima livre
+        if (gondola.getSeats()[0] != null || gondola.getSeats()[1] != null) {
+            gondola = findNextAvailableGondola(number);
+            if (gondola == null) {
+                System.out.println("Error: No available gondolas.");
+                return;
+            }
+            number = gondola.getNumber(); // Atualizar para o número da próxima gôndola livre
+        }
+
         if (seats.length == 1) {
             if (gondola.isValidIndividualBoard(number, seats[0])) {
                 gondolas.set(number - 1, new Gondola(number, seats[0]));
@@ -35,9 +62,7 @@ public class FerrisWheel {
             } else {
                 System.out.println("Invalid boarding attempt for gondola " + number + " with 1 passenger.");
             }
-        }
-
-        else {
+        } else {
             if (gondola.isValidDoubleBoard(number, seats[0], seats[1])) {
                 gondolas.set(number - 1, new Gondola(number, seats[0], seats[1]));
                 System.out.println("Successfully boarded 2 passengers to gondola " + number);
@@ -46,6 +71,7 @@ public class FerrisWheel {
             }
         }
     }
+
 
     public void status() {
         System.out.println("Gondola Status");
