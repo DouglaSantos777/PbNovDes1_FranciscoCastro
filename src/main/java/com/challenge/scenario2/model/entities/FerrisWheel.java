@@ -23,6 +23,26 @@ public class FerrisWheel {
         this.gondolaService = new GondolaService(childBoardService);
     }
 
+    private void validateGondolaNumber(int number) throws InvalidGondolaNumberException {
+        if (number < 1 || number > NUM_GONDOLAS) {
+            throw new InvalidGondolaNumberException("Error: Invalid gondola number " + number);
+        }
+    }
+
+    private Gondola findNextAvailableGondola(int startingNumber) throws NoAvailableGondolaException {
+        for (int i = startingNumber; i < gondolas.size(); i++) {
+            if (gondolas.get(i).isAvailable()) {
+                return gondolas.get(i);
+            }
+        }
+        for (int i = 0; i < startingNumber; i++) {
+            if (gondolas.get(i).isAvailable()) {
+                return gondolas.get(i);
+            }
+        }
+        throw new NoAvailableGondolaException("Error: No available gondolas.");
+    }
+
     public void board(int number, Person... passengers) {
         try {
             validateGondolaNumber(number);
@@ -39,34 +59,13 @@ public class FerrisWheel {
                 gondola.board(passengers);
             }
 
-        } catch (Exception e) {
+        } catch (InvalidGondolaNumberException | NoAvailableGondolaException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
-    private void validateGondolaNumber(int number) {
-       try {
-           if (number < 1 || number > NUM_GONDOLAS) {
-               throw new InvalidGondolaNumberException("Error: Invalid gondola number " + number);
-           }
-       } catch (Exception e){
-           System.out.println(e.getMessage());
-       }
-    }
-
-    private Gondola findNextAvailableGondola(int startingNumber) {
-        for (int i = startingNumber; i < gondolas.size(); i++) {
-            if (gondolas.get(i).isAvailable()) {
-                return gondolas.get(i);
-            }
-        }
-        for (int i = 0; i < startingNumber; i++) {
-            if (gondolas.get(i).isAvailable()) {
-                return gondolas.get(i);
-            }
-        }
-        return null;
-    }
 
     public void status() {
         System.out.println("Gondola Status");
@@ -74,4 +73,3 @@ public class FerrisWheel {
         gondolas.forEach(System.out::println);
     }
 }
-

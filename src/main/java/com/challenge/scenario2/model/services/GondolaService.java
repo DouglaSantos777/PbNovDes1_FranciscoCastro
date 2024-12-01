@@ -4,6 +4,7 @@ import com.challenge.scenario2.model.entities.Person;
 import com.challenge.scenario2.model.entities.Child;
 import com.challenge.scenario2.model.entities.Adult;
 import com.challenge.scenario2.model.exceptions.InvalidBoardingAttemptException;
+import com.challenge.scenario2.model.exceptions.ChildNotAccompaniedByParentException;
 
 public class GondolaService {
     private final BoardValidationService boardValidationService;
@@ -12,7 +13,7 @@ public class GondolaService {
         this.boardValidationService = boardValidationService;
     }
 
-    public boolean isValidBoarding(Person... seats) throws InvalidBoardingAttemptException {
+    public boolean isValidBoarding(Person... seats) throws InvalidBoardingAttemptException, ChildNotAccompaniedByParentException {
         if (seats.length == 1) {
             return isValidIndividualBoard(seats[0]);
         } else if (seats.length == 2) {
@@ -21,7 +22,7 @@ public class GondolaService {
         throw new InvalidBoardingAttemptException("Invalid number of passengers.");
     }
 
-    private boolean isValidDoubleBoard(Person seat1, Person seat2) throws InvalidBoardingAttemptException {
+    private boolean isValidDoubleBoard(Person seat1, Person seat2) throws ChildNotAccompaniedByParentException {
         if (seat1 instanceof Child) {
             return validateChildWithAdult((Child) seat1, seat2);
         } else if (seat2 instanceof Child) {
@@ -37,10 +38,10 @@ public class GondolaService {
         return true;
     }
 
-    private boolean validateChildWithAdult(Child child, Person adult) throws InvalidBoardingAttemptException {
+    private boolean validateChildWithAdult(Child child, Person adult) throws ChildNotAccompaniedByParentException {
         if (adult instanceof Adult && child.getParent() == adult) {
             return true;
         }
-        throw new InvalidBoardingAttemptException("Child must be accompanied by an adult or meet the minimum age.");
+        throw new ChildNotAccompaniedByParentException("Child must be accompanied by an adult or meet the minimum age.");
     }
 }
