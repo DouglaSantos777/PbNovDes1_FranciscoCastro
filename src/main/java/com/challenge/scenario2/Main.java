@@ -6,8 +6,7 @@ import com.challenge.scenario2.model.entities.FerrisWheel;
 
 public class Main {
     public static void main(String[] args) {
-        FerrisWheel ferrisWheel = new FerrisWheel() {
-        }; // Creating a new Ferris wheel
+        FerrisWheel ferrisWheel = new FerrisWheel(); // Creating a new Ferris wheel
         Adult paulo = new Adult("Paulo", 42); // Adult named Paulo
         // Paulo's children
         Child joao = new Child("Joao", 5, paulo); // New child with Paulo as the father

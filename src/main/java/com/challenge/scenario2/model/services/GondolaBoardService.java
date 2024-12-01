@@ -6,11 +6,11 @@ import com.challenge.scenario2.model.entities.Adult;
 import com.challenge.scenario2.model.exceptions.InvalidBoardingAttemptException;
 import com.challenge.scenario2.model.exceptions.ChildNotAccompaniedByParentException;
 
-public class GondolaService {
-    private final BoardValidationService boardValidationService;
+public class GondolaBoardService {
+    private final ChildValidationService boardValidationService;
 
-    public GondolaService(BoardValidationService boardValidationService) {
-        this.boardValidationService = boardValidationService;
+    public GondolaBoardService(ChildValidationService childValidationService) {
+        this.boardValidationService = childValidationService;
     }
 
     public boolean isValidBoarding(Person... seats) throws InvalidBoardingAttemptException, ChildNotAccompaniedByParentException {
@@ -33,7 +33,7 @@ public class GondolaService {
 
     private boolean isValidIndividualBoard(Person seat) throws InvalidBoardingAttemptException {
         if (seat instanceof Child && !boardValidationService.canChildBoard((Child) seat)) {
-            throw new InvalidBoardingAttemptException("Child must be accompanied by an adult or meet the minimum age.");
+            throw new InvalidBoardingAttemptException("Child is not old enough to board.");
         }
         return true;
     }
@@ -42,6 +42,6 @@ public class GondolaService {
         if (adult instanceof Adult && child.getParent() == adult) {
             return true;
         }
-        throw new ChildNotAccompaniedByParentException("Child must be accompanied by an adult or meet the minimum age.");
+        throw new ChildNotAccompaniedByParentException("Child must be accompanied by an adult.");
     }
 }
