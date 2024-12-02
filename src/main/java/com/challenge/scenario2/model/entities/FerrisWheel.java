@@ -1,11 +1,8 @@
 package com.challenge.scenario2.model.entities;
 
 import com.challenge.scenario2.model.exceptions.ChildNotAccompaniedByParentException;
-import com.challenge.scenario2.model.exceptions.InvalidBoardingAttemptException;
 import com.challenge.scenario2.model.exceptions.InvalidGondolaNumberException;
 import com.challenge.scenario2.model.exceptions.NoAvailableGondolaException;
-import com.challenge.scenario2.model.services.GondolaBoardService;
-import com.challenge.scenario2.model.services.ChildBoardService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +10,12 @@ import java.util.List;
 public class FerrisWheel {
     private static final int NUM_GONDOLAS = 18;
     private final List<Gondola> gondolas;
-    private final GondolaBoardService gondolaBoardService;
 
     public FerrisWheel() {
         this.gondolas = new ArrayList<>();
         for (int i = 1; i <= NUM_GONDOLAS; i++) {
             gondolas.add(new Gondola(i));
         }
-
-        ChildBoardService childBoardService = new ChildBoardService();
-        this.gondolaBoardService = new GondolaBoardService(childBoardService);
     }
 
     private void validateGondolaNumber(int number) throws InvalidGondolaNumberException {
@@ -48,8 +41,8 @@ public class FerrisWheel {
     public void board(int number, Person... passengers) {
         try {
             validateGondolaNumber(number);
-
             Gondola gondola = gondolas.get(number - 1);
+
             if (!gondola.isAvailable()) {
                 gondola = findNextAvailableGondola(number);
                 if (gondola == null) {
@@ -57,14 +50,18 @@ public class FerrisWheel {
                 }
             }
 
-            if (gondolaBoardService.isValidBoarding(passengers)) {
-                gondola.board(passengers);
+            for (Person passenger : passengers) {
+                if (passenger instanceof Child child) {
+                    if (child.getAge() < 12 && child.getParent() == null) {
+                        throw new ChildNotAccompaniedByParentException("Child must be accompanied by an adult.");
+                    }
+                }
             }
+
+            gondola.board(passengers);
 
         } catch (InvalidGondolaNumberException | NoAvailableGondolaException e) {
             System.out.println(e.getMessage());
-        } catch (InvalidBoardingAttemptException e) {
-            System.out.println("Boarding Error: " + e.getMessage());
         } catch (ChildNotAccompaniedByParentException e) {
             System.out.println("Child Boarding Error: " + e.getMessage());
         } catch (Exception e) {
