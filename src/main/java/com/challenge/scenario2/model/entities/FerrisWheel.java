@@ -72,8 +72,6 @@ public class FerrisWheel {
         }
     }
 
-
-
     public void status() {
         System.out.println("Gondola Status");
         System.out.println("----------------------------------");
