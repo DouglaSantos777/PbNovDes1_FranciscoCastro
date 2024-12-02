@@ -14,6 +14,5 @@ public class Main {
         String text = scan.nextLine();
         System.out.print("Output: ");
         System.out.println(react.returnFeeling(text));
-
     }
 }
