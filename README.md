@@ -4,18 +4,18 @@ Repositório do projeto **"Pb Springboot - Desafio 1"**, desenvolvido para a tri
 
 O desafio consiste na implementação de 3 cenários e um 4º opcional.
 
----
+
 ## Requisitos do Desafio:
 - Versão do Java: 17
 - Os cenários 1, 2 e 3 são obrigatórios.
 - Utilizar as branches dev e main no repositório git
----
+
 
 ## Tecnologias utilizadas no Desafio:
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=yellow)
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white)
 
----
+
 
 ## Sumário
 - [Cenário 1](#-cenário-1-genealogia)
@@ -25,7 +25,6 @@ O desafio consiste na implementação de 3 cenários e um 4º opcional.
 - [Instruções para Compilar e Executar (cenário 1, 2 e 3)](#-instruções-para-compilar-e-executar-cenário-1-2-e-3)
 
 
----
 ## 📍 Cenário 1: Genealogia
 
 ### Objetivo
@@ -94,11 +93,11 @@ A classe FerrisWheel contém a lógica de buscar a primeira gôndola disponível
 ---
 
 
-## 📍 Cenário 3: Script SQL
+## 📍 Cenário 3: Script SQL para Roda Gigante
 
 ### Objetivo
 
-Neste cenário, o objetivo é criar um script SQL para a criação das tabelas `Gondola` e `Person`, com suas respectivas chaves primárias e estrangeiras, e os relacionamentos necessários. O script deve ser capaz de configurar as tabelas para armazenar os dados relativos às gôndolas e às pessoas da roda gigante.
+Neste cenário, o objetivo é criar um script SQL para a criação das tabelas `Gondola` e `Person` do **cenário 2**, com suas respectivas chaves primárias e estrangeiras, e os relacionamentos necessários. O script deve ser capaz de configurar as tabelas para armazenar os dados relativos às gôndolas e às pessoas da roda gigante.
 
 ### Requisitos
 
