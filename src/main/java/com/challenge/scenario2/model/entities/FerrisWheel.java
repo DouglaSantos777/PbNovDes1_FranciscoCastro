@@ -4,7 +4,7 @@ import com.challenge.scenario2.model.exceptions.ChildNotAccompaniedByParentExcep
 import com.challenge.scenario2.model.exceptions.InvalidGondolaNumberException;
 import com.challenge.scenario2.model.exceptions.NoAvailableGondolaException;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FerrisWheel {
@@ -12,7 +12,7 @@ public class FerrisWheel {
     private final List<Gondola> gondolas;
 
     public FerrisWheel() {
-        this.gondolas = new ArrayList<>();
+        this.gondolas = new LinkedList<>();
         for (int i = 1; i <= NUM_GONDOLAS; i++) {
             gondolas.add(new Gondola(i));
         }
@@ -30,11 +30,6 @@ public class FerrisWheel {
                 return gondolas.get(i);
             }
         }
-        for (int i = 0; i < startingNumber; i++) {
-            if (gondolas.get(i).isAvailable()) {
-                return gondolas.get(i);
-            }
-        }
         throw new NoAvailableGondolaException("Error: No available gondolas.");
     }
 
@@ -45,20 +40,26 @@ public class FerrisWheel {
 
             if (!gondola.isAvailable()) {
                 gondola = findNextAvailableGondola(number);
-                if (gondola == null) {
-                    throw new NoAvailableGondolaException("Error: No available gondolas.");
-                }
             }
 
             for (Person passenger : passengers) {
                 if (passenger instanceof Child child) {
-                    if (child.getAge() < 12 && child.getParent() == null) {
-                        throw new ChildNotAccompaniedByParentException("Child must be accompanied by an adult.");
+                    if (child.getAge() < 12) {
+                        boolean isAccompanied = false;
+                        for (Person person : passengers) {
+                            if (person instanceof Adult adult && adult == child.getParent()) {
+                                isAccompanied = true;
+                                break;
+                            }
+                        }
+                        if (!isAccompanied) {
+                            throw new ChildNotAccompaniedByParentException("Child must be accompanied by an adult.");
+                        }
                     }
                 }
             }
 
-            gondola.board(passengers);
+            gondola.placePassengers(passengers);
 
         } catch (InvalidGondolaNumberException | NoAvailableGondolaException e) {
             System.out.println(e.getMessage());
@@ -70,6 +71,7 @@ public class FerrisWheel {
     }
 
     public void status() {
+        System.out.println();
         System.out.println("Gondola Status");
         System.out.println("----------------------------------");
         gondolas.forEach(System.out::println);

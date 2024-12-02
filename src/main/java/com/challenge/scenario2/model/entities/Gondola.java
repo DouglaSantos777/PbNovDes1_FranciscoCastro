@@ -21,7 +21,7 @@ public class Gondola {
         return seat1 == null && seat2 == null;
     }
 
-    public void board(Person... passengers) {
+    public void placePassengers(Person... passengers) {
         this.seat1 = passengers[0];
         if (passengers.length > 1) {
             this.seat2 = passengers[1];
