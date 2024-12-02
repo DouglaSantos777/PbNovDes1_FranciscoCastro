@@ -1,13 +1,19 @@
 # PbNovDes1_FranciscoCastro
 
-Repositório do projeto **"Pb Springboot - Desafio 1"**, desenvolvido para o programa de Bolsas da Compass UOL.
+Repositório do projeto **"Pb Springboot - Desafio 1"**, desenvolvido para a trilha de formação **Back-end Journey (Java + SpringBoot) - AWS Cloud Context** do programa de Bolsas da **Compass UOL**.
 
-O desafio consiste na implementação de 3 cenários e um 4º opcional (extra).
+O desafio consiste na implementação de 3 cenários e um 4º opcional.
 
 ---
-## Requisitos Técnicos
-- Java JDK 17+
-- IDEA OU COMPILADOR DE CÓDIGO COM SUPORTE A JAVA
+## Requisitos do Desafio:
+- Versão do Java: 17
+- Os cenários 1, 2 e 3 são obrigatórios.
+- Utilizar as branches dev e main no repositório git
+---
+
+## Tecnologias utilizadas no Desafio:
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=yellow)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white)
 
 ---
 
@@ -192,7 +198,12 @@ O código é dividido em duas classes principais:
 
 ### 1. Executando no IntelliJ IDEA
 
-1. Entre no diretorio src.main.java.com.challenge, haverá lá 3 diretório: scenario1, scenario2, scenario3 e scanerio4.
+1. Entre no diretorio src.main.java.com.challenge, haverá lá 4 diretórios: 
+- scenario1
+- scenario2
+- scenario3 (o 3º é apenas um Script SQl)
+- scenario4
+
 2. Clique com o botão direito do mouse no arquivo `Main.java` no painel de navegação ou abra-o e execute.
 3. Selecione a opção para dar **Run** na main do cenário desejado.
 
