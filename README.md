@@ -128,3 +128,35 @@ A aplicação deve simular o processo de embarque de pessoas nas gôndolas, gara
 
 ---
 
+## 📍 Cenário 3: Script SQL
+
+### Propósito
+
+Neste cenário, o objetivo é criar um script SQL para a criação das tabelas `Gondola` e `Person`, com suas respectivas chaves primárias e estrangeiras, e os relacionamentos necessários. O script deve ser capaz de configurar as tabelas para armazenar os dados relativos às gôndolas e às pessoas da roda gigante.
+
+### Requisitos
+
+- Criar um script SQL que contenha apenas as instruções de criação das tabelas `Gondola` e `Person`.
+
+### Script SQL
+
+```sql
+-- script para criar SOMENTE as tabelas Person e Gondola
+
+CREATE TABLE Person (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    parent_id INT DEFAULT NULL,
+    CONSTRAINT fk_parent FOREIGN KEY (parent_id) REFERENCES Person(id) ON DELETE SET NULL
+);
+
+CREATE TABLE Gondola (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    gondola_number TINYINT UNSIGNED NOT NULL UNIQUE,
+    seat1 INT DEFAULT NULL,
+    seat2 INT DEFAULT NULL,
+    CONSTRAINT fk_seat1 FOREIGN KEY (seat1) REFERENCES Person(id),
+    CONSTRAINT fk_seat2 FOREIGN KEY (seat2) REFERENCES Person(id)
+);
+

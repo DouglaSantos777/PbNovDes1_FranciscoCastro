@@ -1,4 +1,4 @@
--- Como foi pedido SOMENTE as tabelas nao tem script para criar o banco
+-- script para criar SOMENTE as tabelas Person e Gondola
 
 CREATE TABLE Person (
                         id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
