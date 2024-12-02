@@ -7,9 +7,9 @@ import com.challenge.scenario2.model.exceptions.InvalidBoardingAttemptException;
 import com.challenge.scenario2.model.exceptions.ChildNotAccompaniedByParentException;
 
 public class GondolaBoardService {
-    private final ChildValidationService boardValidationService;
+    private final ChildBoardService boardValidationService;
 
-    public GondolaBoardService(ChildValidationService childValidationService) {
+    public GondolaBoardService(ChildBoardService childValidationService) {
         this.boardValidationService = childValidationService;
     }
 
