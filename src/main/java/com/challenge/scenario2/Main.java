@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         FerrisWheel ferrisWheel = new FerrisWheel();
         Adult paulo = new Adult("Paulo", 42);
-        // Paulo's children
+
         Child joao = new Child("Joao", 5, paulo);
         Child maria = new Child("Maria", 12, paulo);
 
