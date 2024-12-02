@@ -32,12 +32,10 @@ public class Gondola {
     public String toString() {
         if (seat1 == null && seat2 == null) {
             return number + " (empty)";
-        } else if (seat2 == null) {
-            return number + " Only " + (seat1.getName());
+        } else if (seat1 != null && seat2 != null) {
+            return number + " " + seat1.getName() + " and " + seat2.getName();
         } else {
-            String seat1Name = (seat1 != null) ? seat1.getName() : "(empty)";
-            String seat2Name = (seat2 != null) ? seat2.getName() : "(empty)";
-            return number + " " + seat1Name + " and " + seat2Name;
+            return number + " Only " + (seat1 != null ? seat1.getName() : seat2.getName());
         }
     }
 }

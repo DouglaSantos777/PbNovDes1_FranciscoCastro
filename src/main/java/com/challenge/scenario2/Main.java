@@ -4,8 +4,6 @@ import com.challenge.scenario2.model.entities.Adult;
 import com.challenge.scenario2.model.entities.Child;
 import com.challenge.scenario2.model.entities.FerrisWheel;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         FerrisWheel ferrisWheel = new FerrisWheel();
@@ -13,7 +11,6 @@ public class Main {
 
         Child joao = new Child("Joao", 5, paulo);
         Child maria = new Child("Maria", 12, paulo);
-
         Child pedro = new Child("Pedro", 13);
         Child henrique = new Child("Henrique", 10);
 

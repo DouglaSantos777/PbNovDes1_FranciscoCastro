@@ -2,9 +2,9 @@ package com.challenge.scenario2.model.entities;
 
 import com.challenge.scenario2.model.exceptions.ChildNotAccompaniedByParentException;
 import com.challenge.scenario2.model.exceptions.InvalidGondolaNumberException;
-import com.challenge.scenario2.model.exceptions.NoAvailableGondolaException;
+import com.challenge.scenario2.model.exceptions.NoAvailableGondolasException;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FerrisWheel {
@@ -12,7 +12,7 @@ public class FerrisWheel {
     private final List<Gondola> gondolas;
 
     public FerrisWheel() {
-        this.gondolas = new ArrayList<>();
+        this.gondolas = new LinkedList<>();
         for (int i = 1; i <= NUM_GONDOLAS; i++) {
             gondolas.add(new Gondola(i));
         }
@@ -24,18 +24,15 @@ public class FerrisWheel {
         }
     }
 
-    private Gondola findNextAvailableGondola(int startingNumber) throws NoAvailableGondolaException {
-        for (int i = startingNumber; i < gondolas.size(); i++) {
-            if (gondolas.get(i).isAvailable()) {
-                return gondolas.get(i);
+    private Gondola findNextAvailableGondola(int startingNumber) throws NoAvailableGondolasException {
+        int size = gondolas.size();
+        for (int i = 0; i < size; i++) {
+            int index = (startingNumber + i) % size;
+            if (gondolas.get(index).isAvailable()) {
+                return gondolas.get(index);
             }
         }
-        for (int i = 0; i < startingNumber; i++) {
-            if (gondolas.get(i).isAvailable()) {
-                return gondolas.get(i);
-            }
-        }
-        throw new NoAvailableGondolaException("Error: No available gondolas.");
+        throw new NoAvailableGondolasException("Error: No available gondolas.");
     }
 
     public void board(int number, Person... passengers) {
@@ -45,9 +42,6 @@ public class FerrisWheel {
 
             if (!gondola.isAvailable()) {
                 gondola = findNextAvailableGondola(number);
-                if (gondola == null) {
-                    throw new NoAvailableGondolaException("Error: No available gondolas.");
-                }
             }
 
             for (Person passenger : passengers) {
@@ -69,7 +63,7 @@ public class FerrisWheel {
 
             gondola.placePassengers(passengers);
 
-        } catch (InvalidGondolaNumberException | NoAvailableGondolaException e) {
+        } catch (InvalidGondolaNumberException | NoAvailableGondolasException e) {
             System.out.println(e.getMessage());
         } catch (ChildNotAccompaniedByParentException e) {
             System.out.println("Child Boarding Error: " + e.getMessage());
@@ -79,6 +73,7 @@ public class FerrisWheel {
     }
 
     public void status() {
+        System.out.println();
         System.out.println("Gondola Status");
         System.out.println("----------------------------------");
         gondolas.forEach(System.out::println);
